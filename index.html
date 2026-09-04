@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f4f5f3" />
+    <meta name="description" content="Place the N150AT nozzle at full scale in augmented reality." />
+    <title>N150AT · View in AR</title>
+
+    <script
+      type="module"
+      src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js"
+    ></script>
+
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        color: #202421;
+        background: #f4f5f3;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        min-height: 100dvh;
+        margin: 0;
+      }
+
+      main {
+        display: grid;
+        min-height: 100vh;
+        min-height: 100dvh;
+        place-items: center;
+        padding: max(24px, env(safe-area-inset-top))
+          max(24px, env(safe-area-inset-right))
+          max(24px, env(safe-area-inset-bottom))
+          max(24px, env(safe-area-inset-left));
+      }
+
+      .launcher {
+        width: min(100%, 420px);
+        text-align: center;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(1.8rem, 8vw, 2.8rem);
+        font-weight: 650;
+        letter-spacing: -0.04em;
+      }
+
+      .instruction {
+        margin: 0 auto 28px;
+        max-width: 32ch;
+        color: #666c68;
+        font-size: 0.95rem;
+        line-height: 1.55;
+      }
+
+      .ar-button {
+        width: 100%;
+        min-height: 56px;
+        padding: 14px 22px;
+        border: 0;
+        border-radius: 999px;
+        background: #202421;
+        color: #fff;
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 620;
+        cursor: pointer;
+        transition: opacity 160ms ease, transform 160ms ease;
+      }
+
+      .ar-button:active:not(:disabled) {
+        transform: scale(0.985);
+      }
+
+      .ar-button:focus-visible {
+        outline: 3px solid rgba(32, 36, 33, 0.28);
+        outline-offset: 4px;
+      }
+
+      .ar-button:disabled {
+        cursor: wait;
+        opacity: 0.48;
+      }
+
+      .fallback {
+        margin: 24px 0 0;
+        color: #666c68;
+        font-size: 0.86rem;
+        line-height: 1.55;
+      }
+
+      .fallback[hidden] {
+        display: none;
+      }
+
+      /* Technical AR launcher only; no conventional inline 3D viewer is shown. */
+      model-viewer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .ar-button {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <section class="launcher" aria-labelledby="title">
+        <h1 id="title">N150AT</h1>
+        <p class="instruction">Place the nozzle at full scale on a table or horizontal surface.</p>
+
+        <button id="launch-ar" class="ar-button" type="button" disabled>
+          Preparing AR…
+        </button>
+
+        <p id="fallback" class="fallback" role="status" hidden>
+          Augmented reality is not supported on this device. Open this page in Safari on a
+          compatible iPhone or Chrome on an ARCore-compatible Android phone.
+        </p>
+      </section>
+    </main>
+
+    <model-viewer
+      id="ar-launcher"
+      src="./N150AT_WEB.glb"
+      ios-src="./N150AT_WEB.usdz"
+      alt="N150AT nozzle at real-world scale"
+      loading="eager"
+      ar
+      ar-modes="webxr scene-viewer quick-look"
+      ar-placement="floor"
+      ar-scale="fixed"
+      xr-environment
+    ></model-viewer>
+
+    <script>
+      const model = document.querySelector("#ar-launcher");
+      const launchButton = document.querySelector("#launch-ar");
+      const fallback = document.querySelector("#fallback");
+
+      const showFallback = () => {
+        launchButton.hidden = true;
+        fallback.hidden = false;
+      };
+
+      model.addEventListener("load", () => {
+        if (!model.canActivateAR) {
+          showFallback();
+          return;
+        }
+
+        launchButton.disabled = false;
+        launchButton.textContent = "View in your space";
+      });
+
+      model.addEventListener("error", showFallback);
+
+      launchButton.addEventListener("click", async () => {
+        launchButton.disabled = true;
+        launchButton.textContent = "Opening AR…";
+
+        try {
+          await model.activateAR();
+        } catch (error) {
+          launchButton.disabled = false;
+          launchButton.textContent = "View in your space";
+        }
+      });
+
+      model.addEventListener("ar-status", (event) => {
+        if (event.detail.status === "failed") {
+          launchButton.disabled = false;
+          launchButton.textContent = "Try AR again";
+        }
+      });
+    </script>
+  </body>
+</html>
