@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#f4f5f3" />
-    <meta name="description" content="Place the N150AT nozzle at full scale in augmented reality." />
-    <title>N150AT · View in AR</title>
+    <meta name="description" content="View Atlas, PitBoss, SureLoc 150 and SureLoc 1000 in augmented reality." />
+    <title>Atlas · View in AR</title>
 
     <script
       type="module"
@@ -78,6 +78,13 @@
         transition: opacity 160ms ease, transform 160ms ease;
       }
 
+      select {
+        width: 100%;
+        margin: 8px 0 24px;
+        padding: 12px;
+        font: inherit;
+      }
+
       .ar-button:active:not(:disabled) {
         transform: scale(0.985);
       }
@@ -125,8 +132,16 @@
   <body>
     <main>
       <section class="launcher" aria-labelledby="title">
-        <h1 id="title">N150AT</h1>
+        <h1 id="title">Atlas</h1>
         <p class="instruction">Place the nozzle at full scale on a table or horizontal surface.</p>
+
+        <label for="product">Select a model</label>
+        <select id="product">
+          <option value="N150_web_2.glb" data-orientation="0deg 0deg 90deg">Atlas</option>
+          <option value="PitBoss_150_Visor_3D.glb" data-orientation="0deg 90deg 0deg">PitBoss</option>
+          <option value="SureLoc150_Web_3D.glb" data-orientation="0deg 0deg 0deg">SureLoc 150</option>
+          <option value="SureLoc1000_WEB_3D.glb" data-orientation="180deg 0deg 0deg">SureLoc 1000</option>
+        </select>
 
         <button id="launch-ar" class="ar-button" type="button" disabled>
           Preparing AR…
@@ -141,9 +156,9 @@
 
     <model-viewer
       id="ar-launcher"
-      src="./N150AT_WEB.glb"
-      ios-src="./N150AT_WEB.usdz"
-      alt="N150AT nozzle at real-world scale"
+      src="./N150_web_2.glb"
+      orientation="0deg 0deg 90deg"
+      alt="Atlas nozzle at real-world scale"
       loading="eager"
       ar
       ar-modes="webxr scene-viewer quick-look"
@@ -156,6 +171,20 @@
       const model = document.querySelector("#ar-launcher");
       const launchButton = document.querySelector("#launch-ar");
       const fallback = document.querySelector("#fallback");
+      const product = document.querySelector("#product");
+
+      product.addEventListener("change", () => {
+        const option = product.selectedOptions[0];
+        document.querySelector("#title").textContent = option.textContent;
+        document.title = `${option.textContent} · View in AR`;
+        launchButton.hidden = false;
+        launchButton.disabled = true;
+        launchButton.textContent = "Preparing AR…";
+        fallback.hidden = true;
+        model.alt = `${option.textContent} nozzle at real-world scale`;
+        model.orientation = option.dataset.orientation;
+        model.src = `./${option.value}`;
+      });
 
       const showFallback = () => {
         launchButton.hidden = true;
