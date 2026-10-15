@@ -1,0 +1,113 @@
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        color: #202421;
+        background: #f4f5f3;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        min-height: 100dvh;
+        margin: 0;
+      }
+
+      main {
+        display: grid;
+        min-height: 100vh;
+        min-height: 100dvh;
+        place-items: center;
+        padding: max(24px, env(safe-area-inset-top))
+          max(24px, env(safe-area-inset-right))
+          max(24px, env(safe-area-inset-bottom))
+          max(24px, env(safe-area-inset-left));
+      }
+
+      .launcher {
+        width: min(100%, 420px);
+        text-align: center;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(1.8rem, 8vw, 2.8rem);
+        font-weight: 650;
+        letter-spacing: -0.04em;
+      }
+
+      .instruction {
+        margin: 0 auto 28px;
+        max-width: 32ch;
+        color: #666c68;
+        font-size: 0.95rem;
+        line-height: 1.55;
+      }
+
+      .ar-button {
+        width: 100%;
+        min-height: 56px;
+        padding: 14px 22px;
+        border: 0;
+        border-radius: 999px;
+        background: #202421;
+        color: #fff;
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 620;
+        cursor: pointer;
+        transition: opacity 160ms ease, transform 160ms ease;
+      }
+
+      select {
+        width: 100%;
+        margin: 8px 0 24px;
+        padding: 12px;
+        font: inherit;
+      }
+
+      .ar-button:active:not(:disabled) {
+        transform: scale(0.985);
+      }
+
+      .ar-button:focus-visible {
+        outline: 3px solid rgba(32, 36, 33, 0.28);
+        outline-offset: 4px;
+      }
+
+      .ar-button:disabled {
+        cursor: wait;
+        opacity: 0.48;
+      }
+
+      .fallback {
+        margin: 24px 0 0;
+        color: #666c68;
+        font-size: 0.86rem;
+        line-height: 1.55;
+      }
+
+      .fallback[hidden] {
+        display: none;
+      }
+
+      model-viewer {
+        display: block;
+        width: 100%;
+        height: 340px;
+        margin: 12px 0 24px;
+        border-radius: 16px;
+        background: #e8ebe7;
+      }
+      [hidden] { display: none !important; }
+      .category { color: #666c68; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .ar-button {
+          transition: none;
+        }
+      }

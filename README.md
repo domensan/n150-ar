@@ -1,23 +1,45 @@
 # Product AR
 
-AR-first static launcher for Atlas, PitBoss, SureLoc 150 and SureLoc 1000. Select a model before opening AR.
+Static 3D/AR viewer with a shared page and a catalog in `products.json`.
 
-## Assets
+## Category links
 
-Copied from `../3D Web/`, with the same display orientations as that project's viewer:
+- `/` and `/?category=nozzles`: Atlas, PitBoss, SureLoc 150, SureLoc 1000.
+- `/?category=check-valves`: R800CV. The selector is hidden for a single product.
+- Unknown categories show an error rather than unrelated products.
 
-- Atlas: `N150_web_2.glb`
-- PitBoss: `PitBoss_150_Visor_3D.glb`
-- SureLoc 150: `SureLoc150_Web_3D.glb`
-- SureLoc 1000: `SureLoc1000_WEB_3D.glb`
+The existing printed QR points to `https://domensan.github.io/n150-ar/` and remains the nozzles entry point. After deployment, the Check valves URL will be `https://domensan.github.io/n150-ar/?category=check-valves`. Its final QR should be generated after phone validation.
 
-## AR paths
+## Structure
 
-- Android: WebXR, with Scene Viewer fallback. Scene Viewer loads the original GLB, so display orientation adjustments may differ.
-- iPhone/iPad: AR Quick Look generates USDZ from the selected GLB; the old `N150AT_WEB.usdz` is no longer referenced.
-- Placement: horizontal surface (`ar-placement="floor"`).
-- Scale: fixed at the asset's encoded scale (`ar-scale="fixed"`). Physical dimensions of the new exports have not been independently verified.
+- `index.html`, `styles.css`, `app.js`: shared viewer and AR controls.
+- `products.json`: category names and product IDs, names, model paths and orientations.
+- `models/check-valves/r800cv.glb`: new production asset.
+- Existing nozzle GLBs remain at their original paths.
 
-The existing QR code points to `https://domensan.github.io/n150-ar/`.
+Add a GLB and its catalog entry to add a product. Publish only the web files and their model assets; source `.blend`, STEP and intermediate glTF files are working assets, not viewer dependencies.
 
-Run the selector check with `node --test tests/selector.test.cjs`. Device AR must be checked on a compatible phone.
+## R800CV export
+
+Exported from `FFS_R800CV.blend` using Blender 5.2.1. The original file was not saved or modified. Only the product mesh was exported, excluding the camera and light. All four original materials are retained.
+
+The mesh's world transform was applied, followed by a 180-degree X rotation to match the catalog presentation. Its base was moved to zero and its horizontal bounds centered. No scaling was applied. Blender's GLB export converts Z-up to Y-up; orientation is baked into the geometry, so the viewer uses `0deg 0deg 0deg`.
+
+Exported dimensions: **69.596 × 181.779 × 76.200 mm** (GLB X/Y/Z). Source scale is 1 meter per Blender unit. This agrees with the catalog's rounded 182 mm height and 76.2 mm width.
+
+## AR
+
+- Interactive 3D is available without AR support.
+- Android: WebXR with Scene Viewer fallback.
+- iPhone/iPad: Quick Look, with USDZ generated from the selected GLB.
+- Horizontal placement, fixed source scale.
+- Existing nozzles retain their previous viewer orientation corrections; Scene Viewer may render those original files differently. R800CV has its correction baked in.
+- Loading failures and unsupported AR have distinct messages.
+
+## Validation
+
+Run `node --test tests/selector.test.cjs`.
+
+For local preview, run `python3 -m http.server 8015 --bind 127.0.0.1` and open `http://127.0.0.1:8015/?category=check-valves`.
+
+Automated checks cover category routing, legacy links, model switching, load failures, AR retry, and exported GLB dimensions. Desktop Chrome verified that R800CV and the legacy Atlas page load, including the mobile-width layout. Actual AR placement and appearance still need testing on compatible iPhone/Android devices over HTTPS after deployment.

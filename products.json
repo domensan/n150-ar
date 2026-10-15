@@ -1,0 +1,42 @@
+{
+  "nozzles": {
+    "name": "Nozzles",
+    "products": [
+      {
+        "id": "atlas",
+        "name": "Atlas",
+        "src": "N150_web_2.glb",
+        "orientation": "0deg 0deg 90deg"
+      },
+      {
+        "id": "pitboss",
+        "name": "PitBoss",
+        "src": "PitBoss_150_Visor_3D.glb",
+        "orientation": "0deg 90deg 0deg"
+      },
+      {
+        "id": "sureloc-150",
+        "name": "SureLoc 150",
+        "src": "SureLoc150_Web_3D.glb",
+        "orientation": "0deg 0deg 0deg"
+      },
+      {
+        "id": "sureloc-1000",
+        "name": "SureLoc 1000",
+        "src": "SureLoc1000_WEB_3D.glb",
+        "orientation": "180deg 0deg 0deg"
+      }
+    ]
+  },
+  "check-valves": {
+    "name": "Check valves",
+    "products": [
+      {
+        "id": "r800cv",
+        "name": "R800CV",
+        "src": "models/check-valves/r800cv.glb",
+        "orientation": "0deg 0deg 0deg"
+      }
+    ]
+  }
+}

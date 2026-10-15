@@ -4,144 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#f4f5f3" />
-    <meta name="description" content="View Atlas, PitBoss, SureLoc 150 and SureLoc 1000 in augmented reality." />
-    <title>Atlas · View in AR</title>
+    <meta name="description" content="Explore Fast Fill Systems products in 3D and augmented reality." />
+    <title>Product AR</title>
 
     <script
       type="module"
       src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js"
     ></script>
 
-    <style>
-      :root {
-        color-scheme: light;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-          "Segoe UI", sans-serif;
-        color: #202421;
-        background: #f4f5f3;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        min-width: 320px;
-        min-height: 100vh;
-        min-height: 100dvh;
-        margin: 0;
-      }
-
-      main {
-        display: grid;
-        min-height: 100vh;
-        min-height: 100dvh;
-        place-items: center;
-        padding: max(24px, env(safe-area-inset-top))
-          max(24px, env(safe-area-inset-right))
-          max(24px, env(safe-area-inset-bottom))
-          max(24px, env(safe-area-inset-left));
-      }
-
-      .launcher {
-        width: min(100%, 420px);
-        text-align: center;
-      }
-
-      h1 {
-        margin: 0 0 10px;
-        font-size: clamp(1.8rem, 8vw, 2.8rem);
-        font-weight: 650;
-        letter-spacing: -0.04em;
-      }
-
-      .instruction {
-        margin: 0 auto 28px;
-        max-width: 32ch;
-        color: #666c68;
-        font-size: 0.95rem;
-        line-height: 1.55;
-      }
-
-      .ar-button {
-        width: 100%;
-        min-height: 56px;
-        padding: 14px 22px;
-        border: 0;
-        border-radius: 999px;
-        background: #202421;
-        color: #fff;
-        font: inherit;
-        font-size: 1rem;
-        font-weight: 620;
-        cursor: pointer;
-        transition: opacity 160ms ease, transform 160ms ease;
-      }
-
-      select {
-        width: 100%;
-        margin: 8px 0 24px;
-        padding: 12px;
-        font: inherit;
-      }
-
-      .ar-button:active:not(:disabled) {
-        transform: scale(0.985);
-      }
-
-      .ar-button:focus-visible {
-        outline: 3px solid rgba(32, 36, 33, 0.28);
-        outline-offset: 4px;
-      }
-
-      .ar-button:disabled {
-        cursor: wait;
-        opacity: 0.48;
-      }
-
-      .fallback {
-        margin: 24px 0 0;
-        color: #666c68;
-        font-size: 0.86rem;
-        line-height: 1.55;
-      }
-
-      .fallback[hidden] {
-        display: none;
-      }
-
-      /* Technical AR launcher only; no conventional inline 3D viewer is shown. */
-      model-viewer {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 1px;
-        height: 1px;
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .ar-button {
-          transition: none;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="./styles.css" />
   </head>
 
   <body>
     <main>
       <section class="launcher" aria-labelledby="title">
-        <h1 id="title">Atlas</h1>
-        <p class="instruction">Place the nozzle at full scale on a table or horizontal surface.</p>
+        <p id="category" class="category"></p>
+        <h1 id="title">Product AR</h1>
+        <p class="instruction">Explore the model in 3D or place it at full scale on a horizontal surface.</p>
 
-        <label for="product">Select a model</label>
-        <select id="product">
-          <option value="N150_web_2.glb" data-orientation="0deg 0deg 90deg">Atlas</option>
-          <option value="PitBoss_150_Visor_3D.glb" data-orientation="0deg 90deg 0deg">PitBoss</option>
-          <option value="SureLoc150_Web_3D.glb" data-orientation="0deg 0deg 0deg">SureLoc 150</option>
-          <option value="SureLoc1000_WEB_3D.glb" data-orientation="180deg 0deg 0deg">SureLoc 1000</option>
-        </select>
+        <div id="product-picker" hidden>
+          <label for="product">Select a model</label>
+          <select id="product"></select>
+        </div>
+        <model-viewer
+          id="ar-launcher"
+          camera-controls
+          touch-action="pan-y"
+          loading="eager"
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          ar-placement="floor"
+          ar-scale="fixed"
+          shadow-intensity="1"
+          xr-environment
+        ><span slot="ar-button"></span></model-viewer>
 
         <button id="launch-ar" class="ar-button" type="button" disabled>
           Preparing AR…
@@ -154,73 +50,6 @@
       </section>
     </main>
 
-    <model-viewer
-      id="ar-launcher"
-      src="./N150_web_2.glb"
-      orientation="0deg 0deg 90deg"
-      alt="Atlas nozzle at real-world scale"
-      loading="eager"
-      ar
-      ar-modes="webxr scene-viewer quick-look"
-      ar-placement="floor"
-      ar-scale="fixed"
-      xr-environment
-    ></model-viewer>
-
-    <script>
-      const model = document.querySelector("#ar-launcher");
-      const launchButton = document.querySelector("#launch-ar");
-      const fallback = document.querySelector("#fallback");
-      const product = document.querySelector("#product");
-
-      product.addEventListener("change", () => {
-        const option = product.selectedOptions[0];
-        document.querySelector("#title").textContent = option.textContent;
-        document.title = `${option.textContent} · View in AR`;
-        launchButton.hidden = false;
-        launchButton.disabled = true;
-        launchButton.textContent = "Preparing AR…";
-        fallback.hidden = true;
-        model.alt = `${option.textContent} nozzle at real-world scale`;
-        model.orientation = option.dataset.orientation;
-        model.src = `./${option.value}`;
-      });
-
-      const showFallback = () => {
-        launchButton.hidden = true;
-        fallback.hidden = false;
-      };
-
-      model.addEventListener("load", () => {
-        if (!model.canActivateAR) {
-          showFallback();
-          return;
-        }
-
-        launchButton.disabled = false;
-        launchButton.textContent = "View in your space";
-      });
-
-      model.addEventListener("error", showFallback);
-
-      launchButton.addEventListener("click", async () => {
-        launchButton.disabled = true;
-        launchButton.textContent = "Opening AR…";
-
-        try {
-          await model.activateAR();
-        } catch (error) {
-          launchButton.disabled = false;
-          launchButton.textContent = "View in your space";
-        }
-      });
-
-      model.addEventListener("ar-status", (event) => {
-        if (event.detail.status === "failed") {
-          launchButton.disabled = false;
-          launchButton.textContent = "Try AR again";
-        }
-      });
-    </script>
+    <script src="./app.js" defer></script>
   </body>
 </html>
