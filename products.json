@@ -38,5 +38,16 @@
         "orientation": "0deg 0deg 0deg"
       }
     ]
+  },
+  "receivers": {
+    "name": "Receivers",
+    "products": [
+      {
+        "id": "r150s",
+        "name": "R150S",
+        "src": "models/receivers/r150s.glb",
+        "orientation": "0deg 0deg 0deg"
+      }
+    ]
   }
 }

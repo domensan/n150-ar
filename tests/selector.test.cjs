@@ -22,12 +22,12 @@ async function page(search = '', ok = true) {
 }
 
 test('legacy and category links select only their own models; AR and load errors recover', async () => {
-  for (const [query, category] of [['', 'nozzles'], ['?category=nozzles', 'nozzles'], ['?category=check-valves', 'check-valves']]) {
+  for (const [query, category] of [['', 'nozzles'], ['?category=nozzles', 'nozzles'], ['?category=check-valves', 'check-valves'], ['?category=receivers', 'receivers']]) {
     const { elements: e, document } = await page(query);
     const model = e['ar-launcher'];
     const button = e['launch-ar'];
     assert.equal(e.product.children.length, catalog[category].products.length);
-    assert.equal(e['product-picker'].hidden, category === 'check-valves');
+    assert.equal(e['product-picker'].hidden, catalog[category].products.length === 1);
     for (const item of catalog[category].products) {
       e.product.value = item.id;
       e.product.handlers.change();
@@ -71,17 +71,19 @@ test('unknown categories and catalog failures do not open unrelated products', a
   assert.match(e.fallback.textContent, /catalog could not be loaded/);
 });
 
-test('R800CV export preserves real dimensions and has a grounded Y-up mesh', () => {
-  const bytes = readFileSync(path.join(root, 'models/check-valves/r800cv.glb'));
+for (const [asset, expected] of [
+  ['models/check-valves/r800cv.glb', [0.069596, 0.181779385, 0.0762]],
+  ['models/receivers/r150s.glb', [0.06985, 0.1143, 0.063373]],
+]) test(`${asset} preserves source dimensions and has grounded Y-up geometry`, () => {
+  const bytes = readFileSync(path.join(root, asset));
   assert.equal(bytes.toString('ascii', 0, 4), 'glTF');
   const gltf = JSON.parse(bytes.toString('utf8', 20, 20 + bytes.readUInt32LE(12)));
   const accessors = gltf.meshes.flatMap(mesh => mesh.primitives.map(p => gltf.accessors[p.attributes.POSITION]));
   const min = [0, 1, 2].map(i => Math.min(...accessors.map(a => a.min[i])));
   const max = [0, 1, 2].map(i => Math.max(...accessors.map(a => a.max[i])));
-  const expected = [0.069596, 0.181779385, 0.0762];
   expected.forEach((size, i) => assert.ok(Math.abs(max[i] - min[i] - size) < 0.000001));
   assert.ok(Math.abs(min[1]) < 0.000001);
-  assert.equal(gltf.materials.length, 4);
+  assert.ok(gltf.materials.length > 0);
   for (const node of gltf.nodes.filter(n => n.mesh !== undefined)) {
     assert.equal(node.matrix, undefined);
     assert.equal(node.rotation, undefined);

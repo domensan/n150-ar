@@ -6,6 +6,7 @@ Static 3D/AR viewer with a shared page and a catalog in `products.json`.
 
 - `/` and `/?category=nozzles`: Atlas, PitBoss, SureLoc 150, SureLoc 1000.
 - `/?category=check-valves`: R800CV. The selector is hidden for a single product.
+- `/?category=receivers`: R150S.
 - Unknown categories show an error rather than unrelated products.
 
 The existing printed QR points to `https://domensan.github.io/n150-ar/` and remains the nozzles entry point. After deployment, the Check valves URL will be `https://domensan.github.io/n150-ar/?category=check-valves`. Its final QR should be generated after phone validation.
@@ -43,3 +44,9 @@ Run `node --test tests/selector.test.cjs`.
 For local preview, run `python3 -m http.server 8015 --bind 127.0.0.1` and open `http://127.0.0.1:8015/?category=check-valves`.
 
 Automated checks cover category routing, legacy links, model switching, load failures, AR retry, and exported GLB dimensions. Desktop Chrome verified that R800CV and the legacy Atlas page load, including the mobile-width layout. Actual AR placement and appearance still need testing on compatible iPhone/Android devices over HTTPS after deployment.
+
+## R150S receiver
+
+`models/receivers/r150s.glb` is exported from `FFS_R150S.blend`, preserving its source scale and materials. The original Blender file remains unchanged. The assembly is rotated 90 degrees around Blender X, with its base grounded and horizontal bounds centered. The receiver is presented upright with the threaded end down. Dimensions in GLB X/Y/Z: **69.850 × 114.300 × 63.373 mm**. These are source-file dimensions, not a new physical measurement.
+
+Category URL: `https://domensan.github.io/n150-ar/?category=receivers`. Device AR still requires phone validation.
