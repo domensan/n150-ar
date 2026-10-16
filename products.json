@@ -66,5 +66,22 @@
         "orientation": "0deg 0deg 0deg"
       }
     ]
+  },
+  "pressureless": {
+    "name": "Pressureless",
+    "products": [
+      {
+        "id": "pla80",
+        "name": "PLA80",
+        "src": "models/pressureless/pla80.glb",
+        "orientation": "0deg 0deg 0deg"
+      },
+      {
+        "id": "pla150-m-sv",
+        "name": "PLA150-M SV",
+        "src": "models/pressureless/pla150-m-sv.glb",
+        "orientation": "0deg 0deg 0deg"
+      }
+    ]
   }
 }

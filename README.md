@@ -8,6 +8,7 @@ Static 3D/AR viewer with a shared page and a catalog in `products.json`.
 - `/?category=check-valves`: R800CV. The selector is hidden for a single product.
 - `/?category=receivers`: R150S.
 - `/?category=vents`: V150F (filtered) and V150 (standard).
+- `/?category=pressureless`: PLA80 and PLA150-M SV.
 - Unknown categories show an error rather than unrelated products.
 
 The existing printed QR points to `https://domensan.github.io/n150-ar/` and remains the nozzles entry point. After deployment, the Check valves URL will be `https://domensan.github.io/n150-ar/?category=check-valves`. Its final QR should be generated after phone validation.
@@ -62,3 +63,12 @@ Category URL: `https://domensan.github.io/n150-ar/?category=receivers`. Device A
 These dimensions include the full stem and are not independent physical measurements. Category URL: `https://domensan.github.io/n150-ar/?category=vents`. Select either vent before opening AR. Actual AR placement still requires phone validation.
 
 V150F uses Draco geometry compression (level 6, 16-bit position quantization), reducing the GLB from about 26 MB to 2.8 MB. Browser-decoded dimensions differ from source bounds by less than 0.002 mm. Both vents and switching between them were verified in Chrome at mobile viewport width.
+
+## Pressureless
+
+`models/pressureless/pla80.glb` and `pla150-m-sv.glb` are exported from `FFS_PLA80.blend` and `FFS_PLA150-M_SV.blend`. Both retain their source meter scale and materials; originals were not saved or modified. Only meshes are exported, with horizontal bounds centered and the lowest point at ground level.
+
+- **PLA80:** removes the root assembly tilt, then rotates 90 degrees around Blender X to present the assembly upright. Full-assembly GLB X/Y/Z dimensions: **101.343 × 349.485 × 88.900 mm**.
+- **PLA150-M SV:** rotates 90 degrees around Blender X. GLB X/Y/Z dimensions: **76.200 × 184.063 × 69.723 mm**. Display name follows the user's filename/name; the source mesh is internally named `PLA1000-M SV Defeature`.
+
+Category URL: `https://domensan.github.io/n150-ar/?category=pressureless`. Source dimensions are not independently measured physical dimensions. Actual AR placement requires phone validation.
