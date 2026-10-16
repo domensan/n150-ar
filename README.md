@@ -7,6 +7,7 @@ Static 3D/AR viewer with a shared page and a catalog in `products.json`.
 - `/` and `/?category=nozzles`: Atlas, PitBoss, SureLoc 150, SureLoc 1000.
 - `/?category=check-valves`: R800CV. The selector is hidden for a single product.
 - `/?category=receivers`: R150S.
+- `/?category=vents`: V150F (filtered) and V150 (standard).
 - Unknown categories show an error rather than unrelated products.
 
 The existing printed QR points to `https://domensan.github.io/n150-ar/` and remains the nozzles entry point. After deployment, the Check valves URL will be `https://domensan.github.io/n150-ar/?category=check-valves`. Its final QR should be generated after phone validation.
@@ -50,3 +51,14 @@ Automated checks cover category routing, legacy links, model switching, load fai
 `models/receivers/r150s.glb` is exported from `FFS_R150S.blend`, preserving its source scale and materials. The original Blender file remains unchanged. The assembly is rotated 90 degrees around Blender X, with its base grounded and horizontal bounds centered. The receiver is presented upright with the threaded end down. Dimensions in GLB X/Y/Z: **69.850 × 114.300 × 63.373 mm**. These are source-file dimensions, not a new physical measurement.
 
 Category URL: `https://domensan.github.io/n150-ar/?category=receivers`. Device AR still requires phone validation.
+
+## Fuel Vents
+
+`models/vents/v150f.glb` and `v150.glb` are exported from the corresponding `FFS_V150F.blend` and `FFS_V150.blend` files. Original Blender files remain unchanged. Both models retain their material assignments, are centered horizontally, and stand upright with the stem down and the lowest point at ground level.
+
+- **V150F:** source coordinates contain millimeter values despite a scene scale of 1 meter. Export applies a uniform 0.001 unit conversion; no rotation is needed in Blender. GLB X/Y/Z dimensions: **282.985 × 271.782 × 91.840 mm**.
+- **V150:** original meter scale retained; a 90-degree Blender X rotation makes it upright. GLB X/Y/Z dimensions: **88.265 × 252.224 × 109.652 mm**.
+
+These dimensions include the full stem and are not independent physical measurements. Category URL: `https://domensan.github.io/n150-ar/?category=vents`. Select either vent before opening AR. Actual AR placement still requires phone validation.
+
+V150F uses Draco geometry compression (level 6, 16-bit position quantization), reducing the GLB from about 26 MB to 2.8 MB. Browser-decoded dimensions differ from source bounds by less than 0.002 mm. Both vents and switching between them were verified in Chrome at mobile viewport width.

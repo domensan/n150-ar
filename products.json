@@ -49,5 +49,22 @@
         "orientation": "0deg 0deg 0deg"
       }
     ]
+  },
+  "vents": {
+    "name": "Fuel Vents",
+    "products": [
+      {
+        "id": "v150f",
+        "name": "V150F \u00b7 Filtered Fuel Vent",
+        "src": "models/vents/v150f.glb",
+        "orientation": "0deg 0deg 0deg"
+      },
+      {
+        "id": "v150",
+        "name": "V150 \u00b7 Standard Fuel Vent",
+        "src": "models/vents/v150.glb",
+        "orientation": "0deg 0deg 0deg"
+      }
+    ]
   }
 }

@@ -22,7 +22,7 @@ async function page(search = '', ok = true) {
 }
 
 test('legacy and category links select only their own models; AR and load errors recover', async () => {
-  for (const [query, category] of [['', 'nozzles'], ['?category=nozzles', 'nozzles'], ['?category=check-valves', 'check-valves'], ['?category=receivers', 'receivers']]) {
+  for (const [query, category] of [['', 'nozzles'], ['?category=nozzles', 'nozzles'], ['?category=check-valves', 'check-valves'], ['?category=receivers', 'receivers'], ['?category=vents', 'vents']]) {
     const { elements: e, document } = await page(query);
     const model = e['ar-launcher'];
     const button = e['launch-ar'];
@@ -74,6 +74,8 @@ test('unknown categories and catalog failures do not open unrelated products', a
 for (const [asset, expected] of [
   ['models/check-valves/r800cv.glb', [0.069596, 0.181779385, 0.0762]],
   ['models/receivers/r150s.glb', [0.06985, 0.1143, 0.063373]],
+  ['models/vents/v150f.glb', [0.282984704, 0.271781504, 0.091839775]],
+  ['models/vents/v150.glb', [0.088265002, 0.252224416, 0.109651804]],
 ]) test(`${asset} preserves source dimensions and has grounded Y-up geometry`, () => {
   const bytes = readFileSync(path.join(root, asset));
   assert.equal(bytes.toString('ascii', 0, 4), 'glTF');
