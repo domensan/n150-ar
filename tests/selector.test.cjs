@@ -77,7 +77,8 @@ for (const [asset, expected] of [
   ['models/vents/v150f.glb', [0.282984704, 0.271781504, 0.091839775]],
   ['models/vents/v150.glb', [0.088265002, 0.252224416, 0.109651804]],
   ['models/pressureless/pla80.glb', [0.101343073, 0.349484980, 0.088900015]],
-  ['models/pressureless/pla150-m-sv.glb', [0.0762, 0.184062988, 0.069723003]],
+  ['models/pressureless/pla1000-m-sv.glb', [0.0762, 0.184062988, 0.069723003]],
+  ['models/pressureless/pla1000-m-vlce.glb', [0.074676007, 0.383517295, 0.073660001]],
 ]) test(`${asset} preserves source dimensions and has grounded Y-up geometry`, () => {
   const bytes = readFileSync(path.join(root, asset));
   assert.equal(bytes.toString('ascii', 0, 4), 'glTF');

@@ -77,9 +77,15 @@
         "orientation": "0deg 0deg 0deg"
       },
       {
-        "id": "pla150-m-sv",
-        "name": "PLA150-M SV",
-        "src": "models/pressureless/pla150-m-sv.glb",
+        "id": "pla1000-m-sv",
+        "name": "PLA1000-M SV",
+        "src": "models/pressureless/pla1000-m-sv.glb",
+        "orientation": "0deg 0deg 0deg"
+      },
+      {
+        "id": "pla1000-m-vlce",
+        "name": "PLA1000-M VLCE",
+        "src": "models/pressureless/pla1000-m-vlce.glb",
         "orientation": "0deg 0deg 0deg"
       }
     ]
