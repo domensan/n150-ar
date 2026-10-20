@@ -10,6 +10,7 @@ async function page(search = '', ok = true) {
   const elements = Object.fromEntries(['ar-launcher', 'launch-ar', 'fallback', 'product', 'title', 'category', 'product-picker'].map(id => [id, {
     handlers: {}, children: [], hidden: false,
     addEventListener(event, handler) { this.handlers[event] = handler; },
+    jumpCameraToGoal() {},
     append(option) { this.children.push(option); }
   }]));
   const document = { querySelector: selector => elements[selector.slice(1)], createElement: () => ({}) };
@@ -29,6 +30,7 @@ test('legacy and category links select only their own models; AR and load errors
     assert.equal(e.product.children.length, catalog[category].products.length);
     assert.equal(e['product-picker'].hidden, catalog[category].products.length === 1);
     for (const item of catalog[category].products) {
+      model.cameraOrbit = '180deg 45deg 1m';
       e.product.value = item.id;
       e.product.handlers.change();
       assert.equal(model.src, `./${item.src}`);
@@ -40,11 +42,13 @@ test('legacy and category links select only their own models; AR and load errors
       assert.equal(e.fallback.hidden, true);
       model.canActivateAR = false;
       model.handlers.load();
+      assert.equal(model.cameraOrbit, item.cameraOrbit || '0deg 75deg auto');
       assert.equal(button.hidden, true);
       assert.match(e.fallback.textContent, /not supported/);
       e.product.handlers.change();
       model.canActivateAR = true;
       model.handlers.load();
+      assert.equal(model.cameraOrbit, item.cameraOrbit || '0deg 75deg auto');
       assert.equal(button.disabled, false);
       model.activateAR = async () => {};
       await button.handlers.click();

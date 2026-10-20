@@ -6,31 +6,36 @@
         "id": "atlas",
         "name": "Atlas N150",
         "src": "N150_web_2.glb",
-        "orientation": "0deg 0deg 90deg"
+        "orientation": "0deg 0deg 90deg",
+        "cameraOrbit": "90deg 75deg auto"
       },
       {
         "id": "atlas-n800",
         "name": "Atlas N800",
         "src": "models/nozzles/atlas-n800-v2.glb",
-        "orientation": "0deg 0deg 0deg"
+        "orientation": "0deg 0deg 0deg",
+        "cameraOrbit": "0deg 75deg auto"
       },
       {
         "id": "pitboss",
         "name": "PitBoss",
         "src": "PitBoss_150_Visor_3D.glb",
-        "orientation": "0deg 90deg 0deg"
+        "orientation": "0deg 90deg 0deg",
+        "cameraOrbit": "0deg 75deg auto"
       },
       {
         "id": "sureloc-150",
         "name": "SureLoc 150",
         "src": "SureLoc150_Web_3D.glb",
-        "orientation": "0deg 0deg 0deg"
+        "orientation": "0deg 0deg 0deg",
+        "cameraOrbit": "90deg 75deg auto"
       },
       {
         "id": "sureloc-1000",
         "name": "SureLoc 1000",
         "src": "SureLoc1000_WEB_3D.glb",
-        "orientation": "180deg 0deg 0deg"
+        "orientation": "180deg 0deg 0deg",
+        "cameraOrbit": "90deg 75deg auto"
       }
     ]
   },

@@ -5,6 +5,7 @@ const product = document.querySelector('#product');
 const title = document.querySelector('#title');
 const unsupportedMessage = 'Augmented reality is not supported on this device. You can explore the model in 3D here, or open this page on an AR-compatible phone.';
 let loaded = false;
+let initialCameraOrbit = '0deg 75deg auto';
 
 function showMessage(message) {
   launchButton.hidden = true;
@@ -18,6 +19,8 @@ function ready() {
 }
 
 model.addEventListener('load', () => {
+  model.cameraOrbit = initialCameraOrbit;
+  model.jumpCameraToGoal();
   loaded = true;
   if (!model.canActivateAR) {
     showMessage(unsupportedMessage);
@@ -82,6 +85,7 @@ async function initialize() {
       launchButton.textContent = 'Preparing AR…';
       fallback.hidden = true;
       model.alt = `${item.name} at real-world scale`;
+      initialCameraOrbit = item.cameraOrbit || '0deg 75deg auto';
       model.orientation = item.orientation;
       model.src = `./${item.src}`;
     }
