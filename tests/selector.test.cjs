@@ -72,6 +72,7 @@ test('unknown categories and catalog failures do not open unrelated products', a
 });
 
 for (const [asset, expected] of [
+  ['models/nozzles/atlas-n800-v2.glb', [0.419139504, 0.175899416, 0.130809993]],
   ['models/check-valves/r800cv.glb', [0.069596, 0.181779385, 0.0762]],
   ['models/receivers/r150s.glb', [0.06985, 0.1143, 0.063373]],
   ['models/vents/v150f.glb', [0.282984704, 0.271781504, 0.091839775]],

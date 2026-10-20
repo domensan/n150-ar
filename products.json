@@ -4,9 +4,15 @@
     "products": [
       {
         "id": "atlas",
-        "name": "Atlas",
+        "name": "Atlas N150",
         "src": "N150_web_2.glb",
         "orientation": "0deg 0deg 90deg"
+      },
+      {
+        "id": "atlas-n800",
+        "name": "Atlas N800",
+        "src": "models/nozzles/atlas-n800-v2.glb",
+        "orientation": "0deg 0deg 0deg"
       },
       {
         "id": "pitboss",

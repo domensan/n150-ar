@@ -84,3 +84,7 @@ The user corrected the SV name to PLA1000-M SV. Re-exporting `FFS_PLA1000-M_SV.b
 `/?category=pressureless-systems` displays the complete assembly from `FFS_PRESSURELESS_SYSTEMS_V2.blend`, separate from the Pressureless component selector. The original file is unchanged. Export preserves the existing upright orientation, meter scale and materials; mesh world transforms are baked and the overall assembly is centered horizontally and grounded. GLB X/Y/Z dimensions: **1118.143 × 960.205 × 452.173 mm**.
 
 This source is a static assembled demonstration, not an operating animation. It contains no animated object transforms, constraints or modifiers; the only action is a single material keyframe at frame 26. No flow or mechanism animation was invented. Mobile AR still needs device validation. Existing category QR codes remain unchanged; this new category has its own URL.
+
+## Atlas N800 V2
+
+Nozzles includes Atlas N800 from `FFS_ATLAS_N800V2.blend`. The existing Atlas is labeled Atlas N150 to distinguish them and remains the initial selection. The original files are unchanged. Export preserves meter scale and visible assembly materials, rotates -90 degrees around Blender Z, centers horizontally and grounds the nozzle. Hidden source components remain excluded. Four tiny detached root meshes (`N800AT Body Mod068`, `121`, `146`, `149`) are excluded; they extended bounds below the actual nozzle. GLB X/Y/Z dimensions: **419.140 × 175.899 × 130.810 mm**. Category URL and QR remain unchanged. Phone AR validation is pending.
