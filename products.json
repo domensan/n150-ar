@@ -89,5 +89,16 @@
         "orientation": "0deg 0deg 0deg"
       }
     ]
+  },
+  "pressureless-systems": {
+    "name": "Pressureless systems",
+    "products": [
+      {
+        "id": "pressureless-system-v2",
+        "name": "Pressureless system",
+        "src": "models/pressureless-systems/system-v2.glb",
+        "orientation": "0deg 0deg 0deg"
+      }
+    ]
   }
 }

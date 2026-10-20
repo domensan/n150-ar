@@ -22,7 +22,7 @@ async function page(search = '', ok = true) {
 }
 
 test('legacy and category links select only their own models; AR and load errors recover', async () => {
-  for (const [query, category] of [['', 'nozzles'], ['?category=nozzles', 'nozzles'], ['?category=check-valves', 'check-valves'], ['?category=receivers', 'receivers'], ['?category=vents', 'vents'], ['?category=pressureless', 'pressureless']]) {
+  for (const [query, category] of [['', 'nozzles'], ['?category=nozzles', 'nozzles'], ['?category=check-valves', 'check-valves'], ['?category=receivers', 'receivers'], ['?category=vents', 'vents'], ['?category=pressureless', 'pressureless'], ['?category=pressureless-systems', 'pressureless-systems']]) {
     const { elements: e, document } = await page(query);
     const model = e['ar-launcher'];
     const button = e['launch-ar'];
@@ -79,6 +79,7 @@ for (const [asset, expected] of [
   ['models/pressureless/pla80.glb', [0.101343073, 0.349484980, 0.088900015]],
   ['models/pressureless/pla1000-m-sv.glb', [0.0762, 0.184062988, 0.069723003]],
   ['models/pressureless/pla1000-m-vlce.glb', [0.074676007, 0.383517295, 0.073660001]],
+  ['models/pressureless-systems/system-v2.glb', [1.118143201, 0.960205257, 0.452172816]],
 ]) test(`${asset} preserves source dimensions and has grounded Y-up geometry`, () => {
   const bytes = readFileSync(path.join(root, asset));
   assert.equal(bytes.toString('ascii', 0, 4), 'glTF');
