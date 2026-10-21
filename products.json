@@ -111,5 +111,17 @@
         "orientation": "0deg 0deg 0deg"
       }
     ]
+  },
+  "couplers": {
+    "name": "Couplers",
+    "products": [
+      {
+        "id": "sb100",
+        "name": "SB100 Service Box",
+        "src": "models/couplers/sb100.glb",
+        "orientation": "0deg 0deg 0deg",
+        "cameraOrbit": "25deg 70deg auto"
+      }
+    ]
   }
 }

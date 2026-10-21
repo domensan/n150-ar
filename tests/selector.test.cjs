@@ -23,7 +23,7 @@ async function page(search = '', ok = true) {
 }
 
 test('legacy and category links select only their own models; AR and load errors recover', async () => {
-  for (const [query, category] of [['', 'nozzles'], ['?category=nozzles', 'nozzles'], ['?category=check-valves', 'check-valves'], ['?category=receivers', 'receivers'], ['?category=vents', 'vents'], ['?category=pressureless', 'pressureless'], ['?category=pressureless-systems', 'pressureless-systems']]) {
+  for (const [query, category] of [['', 'nozzles'], ['?category=nozzles', 'nozzles'], ['?category=couplers', 'couplers'], ['?category=check-valves', 'check-valves'], ['?category=receivers', 'receivers'], ['?category=vents', 'vents'], ['?category=pressureless', 'pressureless'], ['?category=pressureless-systems', 'pressureless-systems']]) {
     const { elements: e, document } = await page(query);
     const model = e['ar-launcher'];
     const button = e['launch-ar'];
@@ -76,6 +76,7 @@ test('unknown categories and catalog failures do not open unrelated products', a
 });
 
 for (const [asset, expected] of [
+  ['models/couplers/sb100.glb', [0.454566687, 0.288342237, 0.219350129]],
   ['models/nozzles/atlas-n800-v2.glb', [0.419139504, 0.175899416, 0.130809993]],
   ['models/check-valves/r800cv.glb', [0.069596, 0.181779385, 0.0762]],
   ['models/receivers/r150s.glb', [0.06985, 0.1143, 0.063373]],
