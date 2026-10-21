@@ -104,12 +104,16 @@ for (const [asset, expected] of [
 });
 
 
-test('product links open the exact model and keep the category selector', async () => {
+test('product links open the intended model and keep the category selector', async () => {
   for (const [categoryId, category] of Object.entries(catalog)) {
     for (const item of category.products) {
       const { elements: e } = await page('?category=' + categoryId + '&product=' + item.id);
-      assert.equal(e.product.value, item.id);
-      assert.equal(e.title.textContent, item.name);
+      const initial = item.id === 'pla1000-m-sv' ? category.products.find(p => p.id === 'pla1000-m-vlce') : item;
+      assert.equal(e.product.value, initial.id);
+      assert.equal(e.title.textContent, initial.name);
+      assert.equal(e['ar-launcher'].src, './' + initial.src);
+      e.product.value = item.id;
+      e.product.handlers.change();
       assert.equal(e['ar-launcher'].src, './' + item.src);
       assert.equal(e.product.children.length, category.products.length);
       assert.equal(e['product-picker'].hidden, category.products.length < 2);

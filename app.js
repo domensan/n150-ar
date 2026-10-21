@@ -90,7 +90,11 @@ async function initialize() {
       model.src = `./${item.src}`;
     }
     product.addEventListener('change', selectProduct);
-    const requestedProduct = new URLSearchParams(window.location.search).get('product');
+    let requestedProduct = new URLSearchParams(window.location.search).get('product');
+    // The SV catalog QR opens the mast; the shutoff valve remains selectable.
+    if (categoryId === 'pressureless' && requestedProduct === 'pla1000-m-sv') {
+      requestedProduct = 'pla1000-m-vlce';
+    }
     if (requestedProduct && !category.products.some(item => item.id === requestedProduct)) {
       title.textContent = 'Product not found';
       model.hidden = true;
