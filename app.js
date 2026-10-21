@@ -90,7 +90,14 @@ async function initialize() {
       model.src = `./${item.src}`;
     }
     product.addEventListener('change', selectProduct);
-    product.value = category.products[0].id;
+    const requestedProduct = new URLSearchParams(window.location.search).get('product');
+    if (requestedProduct && !category.products.some(item => item.id === requestedProduct)) {
+      title.textContent = 'Product not found';
+      model.hidden = true;
+      showMessage('This product is unavailable. Check the link or scan the catalog QR again.');
+      return;
+    }
+    product.value = requestedProduct || category.products[0].id;
     selectProduct();
   } catch {
     showMessage('The product catalog could not be loaded. Check your connection and reload this page.');

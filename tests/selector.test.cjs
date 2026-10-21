@@ -102,3 +102,26 @@ for (const [asset, expected] of [
     assert.equal(node.scale, undefined);
   }
 });
+
+
+test('product links open the exact model and keep the category selector', async () => {
+  for (const [categoryId, category] of Object.entries(catalog)) {
+    for (const item of category.products) {
+      const { elements: e } = await page('?category=' + categoryId + '&product=' + item.id);
+      assert.equal(e.product.value, item.id);
+      assert.equal(e.title.textContent, item.name);
+      assert.equal(e['ar-launcher'].src, './' + item.src);
+      assert.equal(e.product.children.length, category.products.length);
+      assert.equal(e['product-picker'].hidden, category.products.length < 2);
+      e.product.value = category.products[0].id;
+      e.product.handlers.change();
+      assert.equal(e['ar-launcher'].src, './' + category.products[0].src);
+    }
+  }
+  for (const product of ['missing', 'v150', '__proto__']) {
+    const { elements: e } = await page('?category=nozzles&product=' + product);
+    assert.equal(e.title.textContent, 'Product not found');
+    assert.equal(e['ar-launcher'].src, undefined);
+    assert.equal(e['launch-ar'].hidden, true);
+  }
+});
