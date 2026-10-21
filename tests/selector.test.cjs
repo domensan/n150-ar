@@ -76,6 +76,7 @@ test('unknown categories and catalog failures do not open unrelated products', a
 });
 
 for (const [asset, expected] of [
+  ['models/pressureless-systems/system-pla80-v2.glb', [1.364148378, 0.774417818, 0.467171788]],
   ['models/couplers/sb100.glb', [0.454566687, 0.288342237, 0.219350129]],
   ['models/nozzles/atlas-n800-v2.glb', [0.419139504, 0.175899416, 0.130809993]],
   ['models/check-valves/r800cv.glb', [0.069596, 0.181779385, 0.0762]],

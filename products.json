@@ -106,9 +106,16 @@
     "products": [
       {
         "id": "pressureless-system-v2",
-        "name": "Pressureless system",
+        "name": "Pressureless system \u00b7 PLA1000",
         "src": "models/pressureless-systems/system-v2.glb",
         "orientation": "0deg 0deg 0deg"
+      },
+      {
+        "id": "pressureless-system-pla80-v2",
+        "name": "Pressureless system \u00b7 PLA80",
+        "src": "models/pressureless-systems/system-pla80-v2.glb",
+        "orientation": "0deg 0deg 0deg",
+        "cameraOrbit": "25deg 75deg auto"
       }
     ]
   },

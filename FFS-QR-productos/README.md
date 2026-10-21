@@ -1,6 +1,6 @@
 # QR por producto con logo FFS
 
-14 códigos individuales. Cada enlace abre el producto indicado y conserva el selector de su categoría.
+15 códigos individuales. Cada enlace conserva el selector de su categoría. El QR de PLA1000-M SV abre inicialmente el mástil VLCE; la válvula SV está disponible en el menú.
 
 SVG vectorial para maquetación y PNG de 1600 × 1600. Logo FFS original centrado, respaldo blanco, corrección H y margen exterior de 4 módulos. No recortar márgenes ni deformar.
 
