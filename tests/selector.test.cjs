@@ -79,6 +79,7 @@ for (const [asset, expected] of [
   ['models/pressureless-systems/system-pla80-v2.glb', [1.364148378, 0.774417818, 0.467171788]],
   ['models/couplers/sb100.glb', [0.454566687, 0.288342237, 0.219350129]],
   ['models/nozzles/atlas-n800-v2.glb', [0.419139504, 0.175899416, 0.130809993]],
+  ['models/nozzles/atticus-1200.glb', [0.386772424, 0.226493388, 0.130809993]],
   ['models/check-valves/r800cv.glb', [0.069596, 0.181779385, 0.0762]],
   ['models/receivers/r150s.glb', [0.06985, 0.1143, 0.063373]],
   ['models/vents/v150f.glb', [0.282984704, 0.271781504, 0.091839775]],

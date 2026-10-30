@@ -17,6 +17,13 @@
         "cameraOrbit": "0deg 75deg auto"
       },
       {
+        "id": "atticus-1200",
+        "name": "Atticus 1200",
+        "src": "models/nozzles/atticus-1200.glb",
+        "orientation": "0deg 0deg 0deg",
+        "cameraOrbit": "0deg 75deg auto"
+      },
+      {
         "id": "pitboss",
         "name": "PitBoss",
         "src": "PitBoss_150_Visor_3D.glb",

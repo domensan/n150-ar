@@ -4,7 +4,7 @@ Static 3D/AR viewer with a shared page and a catalog in `products.json`.
 
 ## Category links
 
-- `/` and `/?category=nozzles`: Atlas, PitBoss, SureLoc 150, SureLoc 1000.
+- `/` and `/?category=nozzles`: Atlas N150, Atlas N800, Atticus 1200, PitBoss, SureLoc 150, SureLoc 1000.
 - `/?category=check-valves`: R800CV. The selector is hidden for a single product.
 - `/?category=receivers`: R150S.
 - `/?category=vents`: V150F (filtered) and V150 (standard).
@@ -88,3 +88,7 @@ This source is a static assembled demonstration, not an operating animation. It 
 ## Atlas N800 V2
 
 Nozzles includes Atlas N800 from `FFS_ATLAS_N800V2.blend`. The existing Atlas is labeled Atlas N150 to distinguish them and remains the initial selection. The original files are unchanged. Export preserves meter scale and visible assembly materials, rotates -90 degrees around Blender Z, centers horizontally and grounds the nozzle. Hidden source components remain excluded. Four tiny detached root meshes (`N800AT Body Mod068`, `121`, `146`, `149`) are excluded; they extended bounds below the actual nozzle. GLB X/Y/Z dimensions: **419.140 × 175.899 × 130.810 mm**. Category URL and QR remain unchanged. Phone AR validation is pending.
+
+## Atticus 1200
+
+Nozzles includes Atticus 1200 from `FFS_ATTICUS_1200.blend` (root assembly `N300ATT`). The original file is unchanged. Export preserves meter scale and materials, rotates -90 degrees around Blender Z, then -30 degrees around Blender Y, centers horizontally and grounds the nozzle. The 24 hidden source components are excluded. The source models the coupler axis 30 degrees above horizontal; the Y rotation levels it so the nozzle points like Atlas N800: coupler horizontal toward -X, handle up, inlet angled down. Draco compression (level 6, 16-bit positions) keeps the GLB at about 3.4 MB. GLB X/Y/Z dimensions: **386.772 × 226.493 × 130.810 mm**. These are source-file dimensions, not physical measurements. Category URL is unchanged; product URL is `?category=nozzles&product=atticus-1200`. Phone AR validation is pending.
