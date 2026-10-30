@@ -56,7 +56,7 @@ model.addEventListener('ar-status', (event) => {
 
 async function initialize() {
   try {
-    const response = await fetch('./products.json');
+    const response = await fetch('./products.json', { cache: 'no-cache' });
     if (!response.ok) throw new Error('Catalog unavailable');
     const catalog = await response.json();
     const categoryId = new URLSearchParams(window.location.search).get('category') || 'nozzles';
