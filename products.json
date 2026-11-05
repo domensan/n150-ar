@@ -95,6 +95,12 @@
         "orientation": "0deg 0deg 0deg"
       },
       {
+        "id": "pla86",
+        "name": "PLA86",
+        "src": "models/pressureless/pla86.glb",
+        "orientation": "0deg 0deg 0deg"
+      },
+      {
         "id": "pla80",
         "name": "PLA80",
         "src": "models/pressureless/pla80.glb",

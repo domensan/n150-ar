@@ -8,7 +8,7 @@ Static 3D/AR viewer with a shared page and a catalog in `products.json`.
 - `/?category=check-valves`: R800CV. The selector is hidden for a single product.
 - `/?category=receivers`: R150S.
 - `/?category=vents`: V150F (filtered) and V150 (standard).
-- `/?category=pressureless`: PLA80, PLA1000-M SV and PLA1000-M VLCE.
+- `/?category=pressureless`: PLA1000-M VLCE, PLA86, PLA80 and PLA1000-M SV.
 - Unknown categories show an error rather than unrelated products.
 
 The existing printed QR points to `https://domensan.github.io/n150-ar/` and remains the nozzles entry point. After deployment, the Check valves URL will be `https://domensan.github.io/n150-ar/?category=check-valves`. Its final QR should be generated after phone validation.
@@ -92,3 +92,7 @@ Nozzles includes Atlas N800 from `FFS_ATLAS_N800V2.blend`. The existing Atlas is
 ## Atticus 1200
 
 Nozzles includes Atticus 1200 from `FFS_ATTICUS_1200.blend` (root assembly `N300ATT`). The original file is unchanged. Export preserves meter scale and materials, rotates -90 degrees around Blender Z, then -30 degrees around Blender Y, centers horizontally and grounds the nozzle. The 23 hidden source components are excluded; the internal cam `fnt-cam-4_fnt-cahtm-4` is included. The source models the coupler axis 30 degrees above horizontal; the Y rotation levels it so the nozzle points like Atlas N800: coupler horizontal toward -X, handle up, inlet angled down. Draco compression (level 6, 16-bit positions) keeps the GLB at about 3.4 MB. GLB X/Y/Z dimensions: **386.772 × 226.493 × 130.810 mm**. These are source-file dimensions, not physical measurements. Category URL is unchanged; product URL is `?category=nozzles&product=atticus-1200`. Phone AR validation is pending.
+
+## PLA86
+
+Pressureless includes PLA86 from `FFS_PLA86.blend`, between PLA1000-M VLCE and PLA80. The original file is unchanged. Only the 36 meshes of the `PLA86 HVSC` assembly are exported; the two backdrop planes, camera and lights are excluded. Export removes the assembly's root tilt and rotates 90 degrees around Blender X so it stands upright like PLA80: hex head up, side port facing the viewer, valve down. Meter scale and materials are preserved, horizontal bounds are centered and the lowest point is grounded. The source's only action is a material keyframe; no animation is exported. GLB X/Y/Z dimensions: **101.343 × 325.563 × 88.900 mm**. These are source-file dimensions, not physical measurements. Product URL: `?category=pressureless&product=pla86`. Phone AR validation is pending.
